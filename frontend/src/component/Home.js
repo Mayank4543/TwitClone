@@ -4,7 +4,7 @@ import { Rightsidebar } from "./Rightsidebar";
 import Feed from "./Feed";
 export const Home = () => {
   return (
-    <div className="flex justify-between  mx-auto">
+    <div className="flex justify-evenly   ">
       <Leftsidebar />
       <Feed />
       <Rightsidebar />
