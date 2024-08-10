@@ -29,14 +29,14 @@ const CheckPost = () => {
                 />
               </div>
               <input
-                className="w-full outline-none border-none text-lg ml-2"
+                className="w-full outline-none border-none text-xl ml-2"
                 type="text"
                 placeholder="What your Happening ?"
               />
             </div>
             <div className="flex items-center justify-between p-4 border-b border-gray-300">
               <div>
-                <CiImageOn />
+                <CiImageOn size={"24px"} />
               </div>
               <button className="bg-[#1D9Bf0] px-4 py-2 border-none rounded-full  text-lg   text-white ">
                 Post
