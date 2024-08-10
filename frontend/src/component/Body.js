@@ -12,7 +12,7 @@ const Body = () => {
       element: <Home />,
       children: [
         {
-          path: "/home",
+          path: "/",
           element: <Feed />,
         },
         {
