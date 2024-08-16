@@ -5,6 +5,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { SlLogout } from "react-icons/sl";
 import { CiBookmarkCheck } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 export const Leftsidebar = () => {
   return (
     <>
@@ -37,12 +38,15 @@ export const Leftsidebar = () => {
             <h1 className="font-bold text-lg ml-2">Notification</h1>
           </div>
 
-          <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
+          <Link
+            to="/profile"
+            className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full"
+          >
             <div>
               <CgProfile size={"24px"} />
             </div>
             <h1 className="font-bold text-lg ml-2">Profile</h1>
-          </div>
+          </Link>
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
             <div>
               <CiBookmarkCheck size={"24px"} />
