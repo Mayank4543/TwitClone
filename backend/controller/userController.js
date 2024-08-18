@@ -1,5 +1,6 @@
-import { User } from "../Models/UserSchema";
-
+import bcryptjs from "bcryptjs";
+import { User } from "../Models/UserSchema.js";
+import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -9,7 +10,7 @@ export const register = async (req, res) => {
         success: false,
       });
     }
-    const user = await User.findOne(email);
+    const user = await User.findOne({ email });
     if (user) {
       return res.status(401).json({
         message: "User  already exist",
@@ -27,6 +28,55 @@ export const register = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+    });
+  }
+};
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(401).json({
+        message: "All field are required",
+        success: false,
+      });
+    }
+    const user = await User.findOne({ email });
+    console.log(user);
+    if (!user) {
+      return res.status(401).json({
+        message: "Incorrect email and password",
+        success: false,
+      });
+    }
+    const ismatch = await bcryptjs.compare(password, user.password);
+    if (!ismatch) {
+      return res.status(401).json({
+        message: "Invalid password",
+        success: false,
+      });
+    }
+    const tokenData = {
+      userId: user._id,
+    };
+    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, {
+      expiresIn: "1d", // Fixed typo
+    });
+    return res
+      .status(201)
+      .cookie("token", token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true }) // Updated `expireIn` to `maxAge`
+      .json({
+        message: "Login successfully!",
+        success: true,
+      });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+    });
   }
 };
