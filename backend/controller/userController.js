@@ -80,3 +80,41 @@ export const login = async (req, res) => {
     });
   }
 };
+export const logout = (req, res) => {
+  return res.cookie("token", "", { expiresIn: new Date(Date.now()) }).json({
+    message: "user logged out successfully",
+    success: true,
+  });
+};
+export const bookmark = async (req, res) => {
+  const isloginUserId = req.body.id;
+  const tweetId = req.params.id;
+  const user = await User.findById(isloginUserId);
+  if (user.bookmark.includes(tweetId)) {
+    await User.findByIdAndUpdate(isloginUserId, {
+      $pull: { bookmark: tweetId },
+    });
+    return res.status(200).json({
+      message: "Remove bookmark successfully",
+      success: true,
+    });
+  } else {
+    await User.findByIdAndUpdate(isloginUserId, {
+      $push: { bookmark: tweetId },
+    });
+    return res.status(200).json({
+      message: "Bookmark successfully",
+    });
+  }
+};
+export const getmyprofile = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findById(id).select("-password");
+    return res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

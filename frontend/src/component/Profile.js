@@ -36,7 +36,7 @@ const Profile = () => {
         </button>
       </div>
       <div className="ml-4 mt-4">
-        <h1 className="font-bold text-xl mt-4 ">Mayank</h1>
+        <h1 className="font-bold text-xl mt-8 ">Mayank</h1>
         <p>@patelmernstack</p>
       </div>
       <div className="ml-4">
