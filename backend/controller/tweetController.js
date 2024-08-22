@@ -54,3 +54,26 @@ export const likeanddislike = async (req, res) => {
     });
   }
 };
+export const follower = async (req, res) => {
+  try {
+    const user = req.body.id;
+
+    const followerid = req.params;
+    const tweet = await Tweet.findById(followerid);
+    if (!tweet.follower.includes(user)) {
+      await Tweet.findByIdAndUpdate(tweet, { $push: { follower: user } });
+      return res.status(200).json({
+        message: "Following successfully",
+        success: true,
+      });
+    } else {
+      await Tweet.findByIdAndUpdate(tweet, { $pull: { follower: user } });
+      return res.status(200).json({
+        message: ` ${user.name}already  follow  ${followerid.name}`,
+        success: true,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

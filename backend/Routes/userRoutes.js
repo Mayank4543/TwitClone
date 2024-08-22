@@ -2,6 +2,7 @@ import express from "express";
 import {
   bookmark,
   getmyprofile,
+  getotherprofile,
   login,
   logout,
   register,
@@ -13,4 +14,5 @@ router.route("/login").post(login);
 router.route("/logout").get(logout);
 router.route("/bookmark/:id").put(isAuthenticate, bookmark);
 router.route("/myprofile/:id").get(isAuthenticate, getmyprofile);
+router.route("/otheruser/:id").get(isAuthenticate, getotherprofile);
 export default router;

@@ -118,3 +118,22 @@ export const getmyprofile = async (req, res) => {
     console.log(error);
   }
 };
+export const getotherprofile = async (req, res) => {
+  try {
+    const id = req.params;
+    const otheruserid = await User.findById({ _id: { $ne: id } }).select(
+      "-password"
+    );
+    if (!otheruserid) {
+      return res.status(401).json({
+        message: "Do not have account",
+        success: false,
+      });
+    }
+    return res.status(200).json({
+      otheruserid,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
