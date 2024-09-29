@@ -7,7 +7,7 @@ const isAuthenticate = async (req, res, next) => {
   try {
     const token = req.cookies.token;
     if (!token) {
-      return res.status(401).jaon({
+      return res.status(401).json({
         message: "You are not authenticated",
         success: false,
       });

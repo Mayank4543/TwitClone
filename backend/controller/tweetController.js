@@ -75,5 +75,9 @@ export const follower = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    return res.status(401).json({
+      message: "Something went wrong!",
+      success: false,
+    });
   }
 };

@@ -87,23 +87,12 @@ export const logout = (req, res) => {
   });
 };
 export const bookmark = async (req, res) => {
-  const isloginUserId = req.body.id;
-  const tweetId = req.params.id;
-  const user = await User.findById(isloginUserId);
-  if (user.bookmark.includes(tweetId)) {
-    await User.findByIdAndUpdate(isloginUserId, {
-      $pull: { bookmark: tweetId },
-    });
-    return res.status(200).json({
-      message: "Remove bookmark successfully",
-      success: true,
-    });
-  } else {
-    await User.findByIdAndUpdate(isloginUserId, {
-      $push: { bookmark: tweetId },
-    });
-    return res.status(200).json({
-      message: "Bookmark successfully",
+  try {
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong!",
+      success: false,
     });
   }
 };
