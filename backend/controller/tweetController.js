@@ -81,3 +81,40 @@ export const follower = async (req, res) => {
     });
   }
 };
+export const getAlltweets = async (req, res) => {
+  // logging user ka tweet +following ka tweet
+  try {
+    const id = req.params.id;
+    const loggedinuser = await User.findById(id);
+    const loggedInUsertweets = await Tweet.find({ userId: id }); //single user
+    const followingUserTweet = await Promise.all(
+      loggedinuser.following.map((otherUserId) => {
+        // multiple user
+        return Tweet.find({ userId: otherUserId });
+      })
+    );
+    return res.status(200).json({
+      tweets: loggedInUsertweets.concat(...followingUserTweet),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getfollowingTweets = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const loggedinuser = await User.findById(id);
+    const loggedInUsertweets = await Tweet.find({ userId: id }); //single user
+    const followingUserTweet = await Promise.all(
+      loggedinuser.following.map((otherUserId) => {
+        // multiple user
+        return Tweet.find({ userId: otherUserId });
+      })
+    );
+    return res.status(200).json({
+      tweets: loggedInUsertweets.concat(...followingUserTweet),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
