@@ -2,7 +2,13 @@ import React from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import useProfiles from "../hooks/useProfiles";
 const Profile = () => {
+  const { user, profile } = useSelector((store) => store.user);
+
+  useProfiles(user?.id);
   return (
     <div className="w-[50%] border-l border-r border-gray-200">
       <div className=" flex items-center py-2">
@@ -14,7 +20,7 @@ const Profile = () => {
         </Link>
         <div className="ml-2">
           {" "}
-          <h1 className="dont-bold text-lg ">Mayank</h1>
+          <h1 className="dont-bold text-lg ">{profile?.name}</h1>
           <p className="text-gray-500 text-sm"> 10 post</p>
         </div>
       </div>
@@ -36,8 +42,8 @@ const Profile = () => {
         </button>
       </div>
       <div className="ml-4 mt-4">
-        <h1 className="font-bold text-xl mt-8 ">Mayank</h1>
-        <p>@patelmernstack</p>
+        <h1 className="font-bold text-xl mt-8 ">{profile?.name}</h1>
+        <p>@{profile?.username}</p>
       </div>
       <div className="ml-4">
         <p>

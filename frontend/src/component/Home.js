@@ -3,6 +3,7 @@ import { Leftsidebar } from "./Leftsidebar";
 import { Rightsidebar } from "./Rightsidebar";
 
 import { Outlet } from "react-router-dom";
+
 export const Home = () => {
   return (
     <div className="flex justify-evenly   ">

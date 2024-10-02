@@ -70,6 +70,7 @@ export const login = async (req, res) => {
       .cookie("token", token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true }) // Updated `expireIn` to `maxAge`
       .json({
         message: "Login successfully!",
+        user,
         success: true,
       });
   } catch (error) {
