@@ -18,6 +18,6 @@ const useProfiles = (id) => {
       }
     };
     fetchMyprofile();
-  }, []);
+  }, [id]);
 };
 export default useProfiles;

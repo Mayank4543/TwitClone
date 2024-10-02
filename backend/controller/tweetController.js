@@ -1,4 +1,5 @@
 import { Tweet } from "../Models/tweetSchema.js";
+import { User } from "../Models/UserSchema.js";
 export const createTweet = async (req, res) => {
   try {
     const { description, id } = req.body;
@@ -8,9 +9,11 @@ export const createTweet = async (req, res) => {
         success: false,
       });
     }
+    const user = await User.findById(id).select("-password");
     await Tweet.create({
       description,
       userId: id,
+      userDetails: user,
     });
     return res.status(200).json({
       message: "Tweet created successfully",

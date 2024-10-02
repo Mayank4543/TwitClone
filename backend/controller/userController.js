@@ -3,8 +3,8 @@ import { User } from "../Models/UserSchema.js";
 import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    if (!name || !email || !password) {
+    const { name, email, username, password } = req.body;
+    if (!name || !email || !username || !password) {
       return res.status(401).json({
         message: "All field are required",
         success: false,
@@ -21,6 +21,7 @@ export const register = async (req, res) => {
     await User.create({
       name,
       email,
+      username,
       password: hashpass,
     });
     return res.status(201).json({
@@ -110,8 +111,8 @@ export const getmyprofile = async (req, res) => {
 };
 export const getotherprofile = async (req, res) => {
   try {
-    const id = req.params;
-    const otheruserid = await User.findById({ _id: { $ne: id } }).select(
+    const { id } = req.params;
+    const otheruserid = await User.find({ _id: { $ne: id } }).select(
       "-password"
     );
     if (!otheruserid) {
