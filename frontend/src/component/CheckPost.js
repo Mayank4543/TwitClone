@@ -34,6 +34,7 @@ const CheckPost = () => {
     } catch (error) {
       console.log(error);
     }
+    setdescription("");
   };
   return (
     <>
