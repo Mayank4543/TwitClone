@@ -76,14 +76,14 @@ const Login = () => {
   };
   return (
     <>
-      <div className=" w-screen h-screen flex items-center justify-center">
+      <div className=" w-screen h-screen flex items-center  justify-center">
         <div className=" flex items-center justify-evenly w-[80%]">
           <div>
             <img
               className="ml-5"
               width={"360px"}
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLN1uOyYGBL6AIkwIyOR2KH9sMYqmn0CsOVA&s"
-              alt="logo"
+              alt="logo1"
             />
           </div>
           <div>
